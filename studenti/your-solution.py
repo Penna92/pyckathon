@@ -61,6 +61,7 @@ word_html_container = custom_utils.getHtmlElement('word')
 error_count = custom_utils.getHtmlElement('errors')
 solution_html = custom_utils.getHtmlElement('solution')
 result_html = custom_utils.getHtmlElement('result')
+used_letters_html = custom_utils.getHtmlElement('used-letters')
 
 #----------------------------------------------------------------------------------------------------
 
@@ -97,6 +98,11 @@ def checkLetters(event):
         global count
         global display 
         letteraUtente = user_letter.value
+        if letteraUtente not in already_guessed:
+            already_guessed.extend([letteraUtente])
+            lettere_provate = " ".join(already_guessed)
+            for lettera in lettere_provate:
+                custom_utils.writeToHtmlElement(used_letters_html, 'Lettere utilizzate: <p style="font-weight: bold"> %s </p>' % (lettere_provate))
         user_letter.value = ""
         if (letteraUtente in wordList):
             display = transformString(letteraUtente, display)
@@ -108,11 +114,13 @@ def checkLetters(event):
             count -= 1
             custom_utils.writeToHtmlElement(error_count, 'Tentativi rimasti: %s' % (count)) 
             if (count == 0):
-                custom_utils.writeToHtmlElement(error_count, 'Tentativi esauriti, hai perso!')
+                custom_utils.writeToHtmlElement(error_count, 'Tentativi esauriti, hai PERSO!')
                 custom_utils.writeToHtmlElement(solution_html, "La parola da indovinare era: <span>%s</span>" % (word))
                 custom_utils.disableInputElement(user_letter)
                 custom_utils.removeOnClickEventFromHtmlElement (add_letter_btn)
-
+def checkEnterKey(event):
+    if(custom_utils.checkIfEventIsEnterKey(event)):
+        checkLetters(event)
         # custom_utils.writeToConsole(len(wordList))    
 def transformString(letteraUtente, display):
     for index, currentLetter in enumerate(wordList):
@@ -126,8 +134,9 @@ def transformString(letteraUtente, display):
             custom_utils.disableInputElement(user_letter)
             custom_utils.removeOnClickEventFromHtmlElement (add_letter_btn)
     return display
-custom_utils.addOnClickEventToHtmlElement (add_letter_btn, checkLetters)
-    
+
+custom_utils.addOnClickEventToHtmlElement (add_letter_btn, checkLetters) 
+custom_utils.addKeyupEventToHtmlElement (user_letter, checkEnterKey)   
 # custom_utils.addKeyupEventToHtmlElement (user_letter, checkLetters)
     
 
