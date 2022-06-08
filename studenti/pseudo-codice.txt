@@ -1,0 +1,60 @@
+1-Creiamo una lista "parole"
+
+2-Definiamo una funzione che prende un elemento casuale della lista
+
+3-Definiamo una funzione che conta le lettere della "parola estratta" e stampa l'equivalente in "trattini"
+
+4-Creiamo una variabile "tentativi" inizializzata a 5
+4a - quando i "tentativi" = 0 il gioco termina e mostriamo un messaggio di "sconfitta".
+4b - se l'utente indovina la parola il gioco termina e mostriamo un messaggio di "vittoria".
+
+5-Creiamo una casella di input
+5a-Impostiamo la lunghezza massima a 1
+
+6-L'utente inserisce 1 carattere alla volta nella casella di input
+
+7-Creiamo un bottone "invia"
+Al click di "invia" o premendo il tasto "invio" della tastiera
+
+8-Verifichiamo se il "carattere inserito" dall'utente è contenuto nella "parola estratta":
+
+    ogni "carettere inserito" dall'utente sarà inserito in una lista "lettere inserite" e sarà mostrata sotto il campo di input
+
+    if "lettere inserite" contiene il "carattere inserito" dall'utente
+
+        l'utente deve essere avvisato con un messaggio, ma i tentativi a disposizione non devono diminuire.
+
+    else 
+
+        if è contenuto in "parola estratta" si sostituisce al trattino nella posizione corrispondente e i tentativi non devono diminuire.
+
+            if la lista di "caratteri inseriti" dall'utente contiene tutti i caratteri (anche ripetuti) della "parola estratta" il gioco termina e mostriamo un messaggio di "vittoria".
+
+        else diminuisci di 1 la variabile "tentativi" ed esce un messaggio di errore che stampa i tentativi rimasti
+
+            if "tentativi" = 0 mostriamo un messaggio di "sconfitta" e il gioco termina. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+
+
+
+    
+
+

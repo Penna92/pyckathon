@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolman</title>
+
+    <!-- Importing PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <link rel="stylesheet" href="screen.css">
+
+    <py-env>
+    - paths:
+        - ./utils.py
+    </py-env>
+</head>
+
+<body class="container">
+
+    <header>
+        <div class="container flex-row cross-centered">
+            <h1 class="flex-row cross-centered">
+                <a class="logo" href="http://boolean.careers">
+                    <img src="img/logo-boolean.png" alt="logo" />
+                </a>
+                <span>Boolman: indovina la parola</span>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Importing hangman script -->
+    <py-script src="./your-solution.py"> </py-script>
+
+    <main class="mx-auto mt-4">
+        <section>
+
+            <div class="word p-8">
+                <p id="word"></p>
+            </div>
+
+            <div class="controls">
+                <input id="user-letter" class="border mr-3 border-gray-300 p-2 rounded single-letter" maxlength="1"
+                    type="text">
+                <button id="add-letter-btn" class="text-white rounded single-button">
+                    INVIA
+                </button>
+            </div>
+
+            <div class="current-state flex items-center justify-between flex-col">
+
+                <p id="errors" class="text-center m-2"></p>
+
+                <p id="used-letters" class="text-center m-2"></p>
+
+                <p id="result" class="text-center m-2"></p>
+
+                <p id="solution" class="text-center m-2"></p>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            Made with &hearts; by <a href="http://boolean.careers">Penna92</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
