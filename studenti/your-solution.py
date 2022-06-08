@@ -62,6 +62,7 @@ error_count = custom_utils.getHtmlElement('errors')
 solution_html = custom_utils.getHtmlElement('solution')
 result_html = custom_utils.getHtmlElement('result')
 used_letters_html = custom_utils.getHtmlElement('used-letters')
+already_used_html = custom_utils.getHtmlElement('already-used')
 
 #----------------------------------------------------------------------------------------------------
 
@@ -95,16 +96,13 @@ def main():
     
 def checkLetters(event):
     # custom_utils.writeToConsole(user_letter.value) 
+        
         global count
         global display 
         letteraUtente = user_letter.value
-        if letteraUtente not in already_guessed:
-            already_guessed.extend([letteraUtente])
-            lettere_provate = " ".join(already_guessed)
-            for lettera in lettere_provate:
-                custom_utils.writeToHtmlElement(used_letters_html, 'Lettere utilizzate: <p style="font-weight: bold"> %s </p>' % (lettere_provate))
-        user_letter.value = ""
+        
         if (letteraUtente in wordList):
+            custom_utils.writeToHtmlElement(error_count, 'Tentativi rimasti: %s' % (count))
             display = transformString(letteraUtente, display)
             custom_utils.writeToHtmlElement(word_html_container, '%s' % (display))
         # custom_utils.writeToConsole('daje')
@@ -112,12 +110,25 @@ def checkLetters(event):
                 custom_utils.writeToConsole(wordList.index(letteraUtente))
         else:
             count -= 1
-            custom_utils.writeToHtmlElement(error_count, 'Tentativi rimasti: %s' % (count)) 
+            if letteraUtente in already_guessed:
+                count +=1 #per non far diminuire i tentativi se l'utente inserisce 2 volte la stessa lettera  
+            custom_utils.writeToHtmlElement(error_count, 'Tentativi rimasti: %s' % (count))
             if (count == 0):
                 custom_utils.writeToHtmlElement(error_count, 'Tentativi esauriti, hai PERSO!')
                 custom_utils.writeToHtmlElement(solution_html, "La parola da indovinare era: <span>%s</span>" % (word))
                 custom_utils.disableInputElement(user_letter)
                 custom_utils.removeOnClickEventFromHtmlElement (add_letter_btn)
+        
+        if letteraUtente not in already_guessed:
+            already_guessed.extend([letteraUtente])
+            lettere_provate = " ".join(already_guessed)
+            for lettera in lettere_provate:
+                custom_utils.writeToHtmlElement(used_letters_html, 'Lettere utilizzate: <p style="font-weight: bold"> %s </p>' % (lettere_provate))
+                custom_utils.writeToHtmlElement(already_used_html, '')
+        elif letteraUtente in already_guessed:
+            custom_utils.writeToHtmlElement(already_used_html, 'Lettera già utilizzata')
+        user_letter.value = ""
+
 def checkEnterKey(event):
     if(custom_utils.checkIfEventIsEnterKey(event)):
         checkLetters(event)
